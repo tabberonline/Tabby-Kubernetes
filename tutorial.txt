@@ -1,0 +1,107 @@
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add stable https://charts.helm.sh/stable
+helm repo update
+helm install -f metrics.yaml metrics bitnami/metrics-server
+helm install nginx-ingress stable/nginx-ingress -n tab
+
+kubectl create secret tls tabby-tls \
+    --namespace default \
+    --key api_tabber_online.key \
+    --cert api_tabber_online.crt
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+k create namespace nginx-ingress
+helm install nginx-ingress ingress-nginx/ingress-nginx -n nginx-ingress
+
+kubectl get svc nginx-ingress-controller -o yaml -n tab
+kubectl get -n hairpin-proxy deployment hairpin-proxy-haproxy -o yaml 
+
+kubectl --namespace tab get services -o wide -w nginx-ingress-controller
+kubectl get --raw "/apis/metrics.k8s.io/v1beta1/namespaces/tab/pods"
+k describe secret letsencrypt-secret-prod -n tab
+k describe secret letsencrypt-secret-prod -n cert-manager
+k get secret --all-namespaces
+kubectl describe certificate tabby-tls -n tab
+k describe ingress -n tab
+kubectl describe certificate tabby-tls -n tab
+kubectl delete ingress tabby-kubernetes-ingress -n tab
+
+kubectl annotate service tabby-backend-service "kube-router.io/service.hairpin=" -n tab
+kubectl get clusterissuer letsencrypt-prod -o yaml
+k exec -n tab tabby-deployment-69bf75cfb8-xl955 -- curl https://api.tabber.online
+
+kubectl describe certificaterequest -n tab
+kubectl describe clusterissuer letsencrypt-prod
+kubectl get certificate -n tab
+
+kubectl get challenges -o wide -n tab
+kubectl get orders -o wide -n tab
+
+kubectl --namespace tab get services -o wide -w nginx-ingress-controller
+kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controller
+
+helm get manifest nginx-ingress -n tab
+
+kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml
+kubectl create namespace cert-manager
+helm repo add jetstack https://charts.jetstack.io
+ helm repo update
+ helm install \
+ cert-manager jetstack/cert-manager \
+ --namespace cert-manager \
+ --version v1.1.0
+
+  kubectl get pods --namespace cert-manager
+
+awhttps://aws.amazon.com/premiumsupport/knowledge-center/terminate-https-traffic-eks-acm/#:~:text=To%20terminate%20HTTPS%20traffic%20at,certificate%20for%20your%20custom%20domain.&text=The%20annotation%20allows%20the%20Kubernetes,Load%20Balancer%20when%20it's%20created.
+
+https://towardsdatascience.com/kubernetes-application-deployment-with-aws-eks-and-ecr-4600e11b2d3c
+
+
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 946904748599.dkr.ecr.ap-south-1.amazonaws.com
+
+docker build -t tabby .
+docker tag tabby:latest 946904748599.dkr.ecr.ap-south-1.amazonaws.com/tabby:latest
+
+docker push 946904748599.dkr.ecr.ap-south-1.amazonaws.com/tabby:latest
+
+docker run -p 8082:8082 tabby
+
+helm ls
+helm delete metrics
+helm uninstall RELEASE_NAME [...] [flags]
+
+helm repo update
+
+kgp --all-namespaces
+kubectl logs metrics-metrics-server-669c67bf54-vqw4w
+kubectl delete --all pods --namespace=foo
+kubectl delete --all pods --all-namespaces
+kubectl describe deployment metrics-metrics-server
+kubectl get nodes -o wide
+kubectl delete pod -n kube-system metrics-server-7949d47784-pjnlh
+kubectl describe node ip-192-168-119-20.ap-south-1.compute.internal
+kubectl describe deployment metrics-server -n kube-system
+kubectl describe hpa tabby-auto
+kubectl get deployment metrics-server -n kube-system
+kubectl -n kube-system get deployment/metrics-server
+kubectl get hpa
+kubectl delete hpa tabby-auto
+kubectl -n kube-system get deployment/metrics-server
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
+kubectl get svc
+kubectl autoscale deployment tabby-deployment --min=1 --max=10 --cpu-percent=60
+
+
+ kubectl get --raw "/apis/metrics.k8s.io/v1beta1/namespaces/tab/pods"
+
+// for public ecr
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s3y9k6b7
+
+docker build -t tabby .
+
+docker tag tabby:latest public.ecr.aws/s3y9k6b7/tabby:latest
+
+docker push public.ecr.aws/s3y9k6b7/tabby:latest

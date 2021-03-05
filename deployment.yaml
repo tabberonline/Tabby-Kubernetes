@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tabby-deployment
+  namespace: tab
+spec:
+  # replicas: 2
+  selector:
+    matchLabels:
+      app: tabby-deployment
+  template:
+    metadata:
+      labels:
+        app: tabby-deployment
+    spec:
+      containers:
+        - name: back-end
+          image: public.ecr.aws/s3y9k6b7/tabby:latest
+          env:
+          - name: AWS_ACCESS_KEY_ID
+            value: "AKIA5Y57L2I37TQ2AKEA"
+          - name: AWS_SECRET_ACCESS_KEY
+            value: "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"
+          - name: TEST_ENV_VAR
+            value: "TEST_ENV_VAR"
+          - name: DB_URL
+            value: "jdbc:postgresql://ec2-50-17-197-184.compute-1.amazonaws.com:5432/db95mtqffp6g1d"
+          - name: DB_PASSWORD
+            value: "93e6ec71da1d5798028cedcb596f3470887169b7631c22bd8da7eab117e74279"
+          - name: DB_USERNAME
+            value: "ohrflgkigxnbna"
+          - name: REDIS_HOST_URL
+            value: "ec2-54-86-106-10.compute-1.amazonaws.com"
+          - name: REDIS_PASSWORD
+            value: "p7eebc6d3c0a4f34799716687a4ab660cdb0dff5623c0b9a92b2043e0ea0d09b7"
+          - name: REDIS_PORT
+            value: "28789"
+          - name: SERVER_PORT
+            value: "8082"
+          - name: SCHEDULER_DB_URL
+            value: "jdbc:postgresql://ec2-54-159-107-189.compute-1.amazonaws.com:5432/daqi6dvv7o2lu5"
+          - name: SCHEDULER_DB_USERNAME
+            value: "nggnfmgccrtxit"
+          - name: SCHEDULER_DB_PASSWORD
+            value: "20deb40cec77d6124adcc2ddbff1439239602e6af0aef24a6d6a82fa4a91eee0"
+          resources:
+            requests:
+              cpu: 200m
+            limits:
+              cpu: 500m
+#kubectl autoscale deployment tabby-deployment --cpu-percent=50 --min=2 --max=3 -n tab

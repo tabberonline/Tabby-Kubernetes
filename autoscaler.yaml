@@ -1,0 +1,25 @@
+kind: HorizontalPodAutoscaler 
+apiVersion: autoscaling/v2beta2
+metadata: 
+  name: tabby-auto
+  namespace: tab
+spec: 
+  maxReplicas: 1
+  minReplicas: 1
+  scaleTargetRef: 
+    apiVersion: apps/v1 
+    kind: Deployment 
+    name: tabby-deployment 
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: AverageValue
+        averageValue: 100Mi

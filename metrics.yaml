@@ -1,0 +1,16 @@
+apiService:
+  create: true
+extraArgs:
+  kubelet-preferred-address-types: InternalIP
+  kubelet-insecure-tls: true
+#https://www.linode.com/community/questions/19756/how-can-i-deploy-the-kubernetes-metrics-server-on-lke
+# apiService:
+#   create: true
+# extraArgs:
+#   kubelet-preferred-address-types: InternalIP
+#   kubelet-insecure-tls:
+# Run the following commands:
+
+# helm repo add bitnami https://charts.bitnami.com/bitnami
+# helm repo update
+# helm install -f metrics.yaml metrics bitnami/metrics-server --namespace tab

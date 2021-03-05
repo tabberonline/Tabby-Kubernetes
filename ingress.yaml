@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tabby-kubernetes-ingress
+  namespace: tab
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    #cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  tls:
+  - hosts:
+    - api.tabber.online
+    secretName: tabby-tls
+  rules:
+  - host:  api.tabber.online
+    http:
+      paths:
+      - backend:
+          service:
+            name: tabby-backend-service
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+      

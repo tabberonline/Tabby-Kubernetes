@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"kubernetes.digitalocean.com/load-balancer-id":"48bb43e6-ff58-4e3b-b5d0-d13cd3c0925a","service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol":"true","service.beta.kubernetes.io/do-loadbalancer-hostname":"api.tabber.online"},"creationTimestamp":"2021-02-17T18:32:44Z","finalizers":["service.kubernetes.io/load-balancer-cleanup"],"labels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"ingress-nginx","app.kubernetes.io/version":"0.34.1","helm.sh/chart":"ingress-nginx-2.11.1"},"managedFields":[{"apiVersion":"v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:kubectl.kubernetes.io/last-applied-configuration":{},"f:service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol":{}},"f:labels":{".":{},"f:app.kubernetes.io/component":{},"f:app.kubernetes.io/instance":{},"f:app.kubernetes.io/managed-by":{},"f:app.kubernetes.io/name":{},"f:app.kubernetes.io/version":{},"f:helm.sh/chart":{}}},"f:spec":{"f:externalTrafficPolicy":{},"f:ports":{".":{},"k:{\"port\":443,\"protocol\":\"TCP\"}":{".":{},"f:name":{},"f:port":{},"f:protocol":{},"f:targetPort":{}},"k:{\"port\":80,\"protocol\":\"TCP\"}":{".":{},"f:name":{},"f:port":{},"f:protocol":{},"f:targetPort":{}}},"f:selector":{".":{},"f:app.kubernetes.io/component":{},"f:app.kubernetes.io/instance":{},"f:app.kubernetes.io/name":{}},"f:sessionAffinity":{},"f:type":{}}},"manager":"kubectl-client-side-apply","operation":"Update","time":"2021-02-17T18:32:44Z"},{"apiVersion":"v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{"f:kubernetes.digitalocean.com/load-balancer-id":{}},"f:finalizers":{".":{},"v:\"service.kubernetes.io/load-balancer-cleanup\"":{}}},"f:status":{"f:loadBalancer":{"f:ingress":{}}}},"manager":"digitalocean-cloud-controller-manager","operation":"Update","time":"2021-02-17T18:35:13Z"}],"name":"ingress-nginx-controller","namespace":"ingress-nginx","resourceVersion":"1401","uid":"32894ce3-a813-4535-8a8f-3876b31a9b00"},"spec":{"clusterIP":"10.245.43.30","clusterIPs":["10.245.43.30"],"externalTrafficPolicy":"Local","healthCheckNodePort":32399,"ports":[{"name":"http","nodePort":32186,"port":80,"protocol":"TCP","targetPort":"http"},{"name":"https","nodePort":32482,"port":443,"protocol":"TCP","targetPort":"https"}],"selector":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/name":"ingress-nginx"},"sessionAffinity":"None","type":"LoadBalancer"},"status":{"loadBalancer":{"ingress":[{"ip":"64.225.87.99"}]}}}
+    kubernetes.digitalocean.com/load-balancer-id: 48bb43e6-ff58-4e3b-b5d0-d13cd3c0925a
+    service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: api.tabber.online
+  creationTimestamp: "2021-02-17T18:32:44Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/version: 0.34.1
+    helm.sh/chart: ingress-nginx-2.11.1
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:kubernetes.digitalocean.com/load-balancer-id: {}
+        f:finalizers:
+          .: {}
+          v:"service.kubernetes.io/load-balancer-cleanup": {}
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: digitalocean-cloud-controller-manager
+    operation: Update
+    time: "2021-02-17T18:35:13Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: {}
+          f:service.beta.kubernetes.io/do-loadbalancer-hostname: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/version: {}
+          f:helm.sh/chart: {}
+      f:spec:
+        f:externalTrafficPolicy: {}
+        f:ports:
+          .: {}
+          k:{"port":80,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":443,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/name: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2021-02-17T18:41:29Z"
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+  resourceVersion: "2436"
+  uid: 32894ce3-a813-4535-8a8f-3876b31a9b00
+spec:
+  clusterIP: 10.245.43.30
+  clusterIPs:
+  - 10.245.43.30
+  externalTrafficPolicy: Cluster
+  healthCheckNodePort: 32399
+  ports:
+  - name: http
+    nodePort: 32186
+    port: 80
+    protocol: TCP
+    targetPort: http
+  - name: https
+    nodePort: 32482
+    port: 443
+    protocol: TCP
+    targetPort: https
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: api.tabber.online
