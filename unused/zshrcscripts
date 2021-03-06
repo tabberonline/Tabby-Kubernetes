@@ -101,7 +101,8 @@ docker push public.ecr.aws/s3y9k6b7/tabby
 function gotabby(){
 helm repo update
 helm install -f /Users/macbook/Desktop/Tabby-Kubernetes/metrics.yaml metrics bitnami/metrics-server
-helm install nginx-ingress stable/nginx-ingress -n tab
+kubectl create namespace ingress
+helm install nginx-ingress stable/nginx-ingress -n ingress
 kubectl kustomize /Users/macbook/Desktop/Tabby-Kubernetes > /Users/macbook/Desktop/Tabby-Kubernetes/compiled.yaml
 kubectl apply -f /Users/macbook/Desktop/Tabby-Kubernetes/compiled.yaml
 }
