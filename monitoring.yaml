@@ -11,20 +11,20 @@ prometheus:
     - /prometheus(/|$)(.*)
   prometheusSpec:
     routePrefix: /
-    externalUrl: http://stg.tabber.online/prometheus
+    externalUrl: http://api.tabber.online/prometheus
     storageSpec:
       volumeClaimTemplate:
         spec:
           storageClassName: linode-block-storage-retain
           resources:
             requests:
-              storage: 10Gi
+              storage: 5Gi
 
 grafana:
   persistence:
     enabled: true
     storageClassName: linode-block-storage-retain
-    size: 10Gi
+    size: 5Gi
   ingress:
     enabled: true
     annotations:
@@ -36,7 +36,7 @@ grafana:
     path: /grafana(/|$)(.*)
   grafana.ini:
     server:
-      domain: stg.tabber.online
+      domain: api.tabber.online
       root_url: "%(protocol)s://%(domain)s/grafana/"
       enable_gzip: "true"
 
