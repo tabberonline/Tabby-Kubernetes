@@ -1,0 +1,51 @@
+# Helm chart values for Prometheus Operator with HTTPS and basic auth
+prometheus:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+    - stg.tabber.online
+    paths:
+    - /prometheus(/|$)(.*)
+  prometheusSpec:
+    routePrefix: /
+    externalUrl: http://stg.tabber.online/prometheus
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: linode-block-storage-retain
+          resources:
+            requests:
+              storage: 10Gi
+
+grafana:
+  persistence:
+    enabled: true
+    storageClassName: linode-block-storage-retain
+    size: 10Gi
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+
+    hosts:
+    - stg.tabber.online
+    path: /grafana(/|$)(.*)
+  grafana.ini:
+    server:
+      domain: stg.tabber.online
+      root_url: "%(protocol)s://%(domain)s/grafana/"
+      enable_gzip: "true"
+
+# Disable control plane metrics
+kubeEtcd:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
