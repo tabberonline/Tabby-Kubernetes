@@ -6,7 +6,13 @@ helm install -f metrics.yaml metrics bitnami/metrics-server
 helm install nginx-ingress stable/nginx-ingress -n tab
 
 kubectl create secret tls tabby-tls \
-    --namespace default \
+    --namespace tab \
+    --key api_tabber_online.key \
+    --cert api_tabber_online.crt
+    
+(ssl for grafana / prometheus)
+kubectl create secret tls tabby-tls \
+    --namespace monitoring \
     --key api_tabber_online.key \
     --cert api_tabber_online.crt
 
