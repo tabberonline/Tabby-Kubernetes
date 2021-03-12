@@ -30,11 +30,11 @@ spec:
           - name: DB_USERNAME
             value: "ohrflgkigxnbna"
           - name: REDIS_HOST_URL
-            value: "ec2-54-86-106-10.compute-1.amazonaws.com"
+            value: "ec2-18-204-153-155.compute-1.amazonaws.com"
           - name: REDIS_PASSWORD
-            value: "p7eebc6d3c0a4f34799716687a4ab660cdb0dff5623c0b9a92b2043e0ea0d09b7"
+            value: "pb2659c1e62d19aa4837eb95d371213ce6568aec44ba602e3a94127a296f0e383"
           - name: REDIS_PORT
-            value: "28789"
+            value: "25609"
           - name: SERVER_PORT
             value: "8082"
           - name: SCHEDULER_DB_URL
