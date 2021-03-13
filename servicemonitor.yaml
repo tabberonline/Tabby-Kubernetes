@@ -16,4 +16,4 @@ spec:
   endpoints:
   - port: actpm
     path: /actuator/prometheus
-    interval: 2s
+    interval: 15s
