@@ -5,6 +5,8 @@ helm repo update
 helm install -f metrics.yaml metrics bitnami/metrics-server
 helm install nginx-ingress stable/nginx-ingress -n tab
 
+k get prometheus lke-monitor-prometheus-ope-prometheus -n monitoring -o yaml
+k get servicemonitor -n monitoring
 kubectl create secret tls tabby-tls \
     --namespace tab \
     --key api_tabber_online.key \

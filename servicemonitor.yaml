@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: scp-service-creator
+  namespace: tab
+  labels:
+    app: tabby-ser
+    app.kubernetes.io/managed-by: Helm
+    chart: prometheus-operator-9.3.2
+    heritage: Helm
+    release: lke-monitor
+spec:
+  selector:
+    matchLabels:
+      app: tabby-ser
+  endpoints:
+  - port: actpm
+    path: /actuator/prometheus
+    interval: 2s
