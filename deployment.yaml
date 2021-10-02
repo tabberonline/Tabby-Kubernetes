@@ -16,6 +16,18 @@ spec:
       containers:
         - name: back-end
           image: public.ecr.aws/s3y9k6b7/tabby:latest
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8082
+            failureThreshold: 1
+            periodSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /ping
+              port: 8082
+            failureThreshold: 8
+            periodSeconds: 15
           env:
           - name: AWS_ACCESS_KEY_ID
             value: "AKIA5Y57L2I37TQ2AKEA"
@@ -24,25 +36,25 @@ spec:
           - name: TEST_ENV_VAR
             value: "TEST_ENV_VAR"
           - name: DB_URL
-            value: "jdbc:postgresql://ec2-50-17-197-184.compute-1.amazonaws.com:5432/db95mtqffp6g1d"
+            value: "jdbc:postgresql://tabbydb.c8oyvwlbcggq.us-east-2.rds.amazonaws.com:5432/tabby_db"
           - name: DB_PASSWORD
-            value: "93e6ec71da1d5798028cedcb596f3470887169b7631c22bd8da7eab117e74279"
+            value: "Tabby1234"
           - name: DB_USERNAME
-            value: "ohrflgkigxnbna"
+            value: "tabbydb"
           - name: REDIS_HOST_URL
-            value: "ec2-18-204-153-155.compute-1.amazonaws.com"
+            value: "172.105.33.59"
           - name: REDIS_PASSWORD
-            value: "pb2659c1e62d19aa4837eb95d371213ce6568aec44ba602e3a94127a296f0e383"
+            value: "865CE0E6-03E4-4B09-9F23-13A64C507E58"
           - name: REDIS_PORT
-            value: "25609"
+            value: "6379"
           - name: SERVER_PORT
             value: "8082"
           - name: SCHEDULER_DB_URL
-            value: "jdbc:postgresql://ec2-54-159-107-189.compute-1.amazonaws.com:5432/daqi6dvv7o2lu5"
+            value: "jdbc:postgresql://tabbydb.c8oyvwlbcggq.us-east-2.rds.amazonaws.com:5432/tabby_scheduler_db"
           - name: SCHEDULER_DB_USERNAME
-            value: "nggnfmgccrtxit"
+            value: "tabbydb"
           - name: SCHEDULER_DB_PASSWORD
-            value: "20deb40cec77d6124adcc2ddbff1439239602e6af0aef24a6d6a82fa4a91eee0"
+            value: "Tabby1234"
           resources:
             requests:
               cpu: 200m
